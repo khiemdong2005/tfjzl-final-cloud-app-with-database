@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Kết quả bài kiểm tra</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container mt-5">
+    <div class="card border-success shadow">
+        <div class="card-header bg-success text-white text-center py-4">
+            <h2>🎉 Chúc mừng bạn đã nộp bài thành công!</h2>
+            <p class="mb-0">Kết quả bài thi khóa học: <strong>{{ course.name }}</strong></p>
+        </div>
+        <div class="card-body text-center p-5">
+            <h4 class="text-muted mb-4">Hệ thống đã ghi nhận bài làm của bạn</h4>
+            <div class="alert alert-info d-inline-block px-5 py-3">
+                <strong>Mã bài nộp (Submission ID):</strong> #{{ submission.id }}
+            </div>
+            <div class="mt-4">
+                <a href="{% url 'onlinecourse:course_details' course.id %}" class="btn btn-outline-primary btn-lg px-4">Làm lại bài thi</a>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
