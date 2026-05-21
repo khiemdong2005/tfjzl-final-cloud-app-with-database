@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Kết quả bài thi</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <nav class="navbar navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="{% url 'onlinecourse:index' %}">Trang chủ Online Course</a>
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+        <div class="card text-center shadow">
+            <div class="card-header bg-success text-white">
+                <h2>Kết quả bài thi trắc nghiệm</h2>
+            </div>
+            <div class="card-body my-4">
+                <h3 class="card-title text-success">Congratulations!</h3>
+                <p class="card-text lead mt-3">Bạn đã hoàn thành bài kiểm tra của khóa học: <strong>{{ course.name }}</strong></p>
+                <h4 class="text-info mt-4">Điểm số của bạn: {{ grade }} / 100</h4>
+                <a href="{% url 'onlinecourse:index' %}" class="btn btn-primary mt-4 px-4">Quay về trang chủ</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

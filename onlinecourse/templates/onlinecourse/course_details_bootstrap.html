@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ course.name }}</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <nav class="navbar navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="{% url 'onlinecourse:index' %}">Trang chủ Online Course</a>
+            <ul class="nav navbar-nav navbar-right">
+                {% if user.is_authenticated %}
+                <li>
+                    <a class="btn btn-link" href="#">{{ user.first_name }}({{ user.username }})</a>
+                    <a class="btn btn-outline-danger" href="{% url 'onlinecourse:logout' %}">Đăng xuất</a>
+                </li>
+                {% endif %}
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container mt-4">
+        <h1 class="text-primary">{{ course.name }}</h1>
+        <p class="lead">{{ course.description }}</p>
+
+        <form id="exam-form" action="{% url 'onlinecourse:submit' course.id %}" method="post">
+            {% csrf_token %}
+            {% for lesson in course.lesson_set.all %}
+                <div class="card my-4 shadow-sm">
+                    <div class="card-header bg-info text-white">
+                        <h4 class="card-title">{{ lesson.title }}</h4>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">{{ lesson.content }}</p>
+                        {% for question in lesson.question_set.all %}
+                            <div class="border rounded p-3 my-3 bg-light">
+                                <h5 class="text-dark">Câu hỏi: {{ question.question_text }}</h5>
+                                <div class="form-group mt-2">
+                                    {% for choice in question.choice_set.all %}
+                                        <div class="form-check my-1">
+                                            <label class="form-check-label">
+                                                <input type="checkbox" name="choice_{{ choice.id }}" class="form-check-input" value="{{ choice.id }}">
+                                                {{ choice.choice_text }}
+                                            </label>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            {% endfor %}
+            <div class="text-center my-5">
+                <button type="submit" class="btn btn-success btn-lg px-5">Nộp bài thi (Submit)</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
